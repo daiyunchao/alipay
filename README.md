@@ -22,6 +22,9 @@
 
 ---
 
+# 特别说明
+> 该库是来自 https://github.com/Luncher/alipay 的库,但由于想在该库中添加一些功能,提交的PR未合并,于是就自己fork了原作者的库,并且做出了一些修改
+
 ## 安装
 
 ``` javascript

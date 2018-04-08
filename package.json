@@ -1,5 +1,5 @@
 {
-  "name": "alipay-mobile",
+  "name": "alipay-mobile-dyc",
   "version": "2.2.2",
   "description": "",
   "main": "lib/index.js",
@@ -27,12 +27,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Luncher/alipay-mobile"
+    "url": "https://github.com/daiyunchao/alipay"
   },
   "author": {
-    "name": "linchen",
-    "email": "gakiclin@gmail.com",
-    "url": "https://github.com/Luncher"
+    "name": "daiyuncaho",
+    "email": "312931671@qq.com",
+    "url": "https://github.com/daiyunchao"
   },
   "license": "MIT",
   "devDependencies": {

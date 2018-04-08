@@ -24,12 +24,13 @@
 
 # 特别说明
 > 该库是来自 https://github.com/Luncher/alipay 的库,但由于想在该库中添加一些功能,提交的PR未合并,于是就自己fork了原作者的库,并且做出了一些修改
+目前只添加了查询转账订单接口`queryTransferOrder`的方法
 
 ## 安装
 
 ``` javascript
 
-npm i alipay-mobile -S
+npm i alipay-mobile-dyc -S
 
 ```
 
@@ -37,7 +38,7 @@ npm i alipay-mobile -S
 
 ``` javascript
 const fs = require('fs')
-const Alipay = require('alipay-mobile')
+const Alipay = require('alipay-mobile-dyc')
 
 const read = filename => {
   return fs.readFileSync(path.resolve(__dirname, filename))

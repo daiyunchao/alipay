@@ -412,6 +412,9 @@ return service.createAliPaySign(data).then(result=>{
 
 ```javascript
 
+let data={
+  "auth_token":"sdfdfd"
+};
 return service.getUserInfoShare(data).then(result=>{
       assert(result["code"]==-1);
       assert(result.message == 'error', result.message);

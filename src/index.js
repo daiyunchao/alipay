@@ -331,4 +331,17 @@ export default class Alipay {
           })
       })
   }
+
+  createAliPaySign(params){
+    return Promise.resolve()
+    .then(()=>{
+      let signStr=utils.makeSignStr(params);
+      let sign= utils.makeSign(this.privKey,params);
+      signStr=signStr+"&sign="+sign;
+      return {
+        "sign":sign,
+        "signStr":signStr
+      }
+    })
+  }
 }

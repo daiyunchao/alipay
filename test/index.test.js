@@ -4,6 +4,7 @@ import assert from 'assert'
 import sinon from 'sinon'
 import urllib from 'urllib'
 import Alipay from '~/index'
+import { signAlgorithm } from '../src/utils';
 
 
 const read = filename => {
@@ -93,16 +94,36 @@ describe('ALIPAY unit test', function () {
   //     })
   // });
 
-  it('should allow queryTransferOrder  ', () => {
-    const data = {
-      out_biz_no: '3142321423432',
-      order_id: '20160627110070001502260006780837'
-    }
-    return service.queryTransferOrder(data).then(result => {
-      assert(result["code"]==-1);
-      assert(result.message == 'error', result.message);
-      assert(result.data.code === '40004');
-      assert(result.data.sub_msg === '转账订单不存在');
-    });
+  // it('should allow queryTransferOrder  ', () => {
+  //   const data = {
+  //     out_biz_no: '3142321423432',
+  //     order_id: '20160627110070001502260006780837'
+  //   }
+  //   return service.queryTransferOrder(data).then(result => {
+  //     assert(result["code"]==-1);
+  //     assert(result.message == 'error', result.message);
+  //     assert(result.data.code === '40004');
+  //     assert(result.data.sub_msg === '转账订单不存在');
+  //   });
+  // })
+
+  it('should allow createAliPaySign ',()=>{
+    const data={
+      "apiname":"com.alipay.account.auth",
+      "method":"alipay.open.auth.sdk.code.get",
+      "app_id":"2016080100137766",
+      "app_name":"mc",
+      "biz_type":"openservice",
+      "pid":"2088711543147294",
+      "product_id":"APP_FAST_LOGIN",
+      "scope":"kuaijie",
+      "target_id":Date.now()+"",
+      "auth_type":"AUTHACCOUNT",
+      "sign_type":"RSA2"
+    };
+    return service.createAliPaySign(data).then(result => {
+      console.log("sign ==>",result["sign"]);
+      console.log("signStr ==>",result["signStr"]);
+    })
   })
 })

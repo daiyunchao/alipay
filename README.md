@@ -24,7 +24,9 @@
 
 # 特别说明
 > 该库是来自 https://github.com/Luncher/alipay 的库,但由于想在该库中添加一些功能,提交的PR未合并,于是就自己fork了原作者的库,并且做出了一些修改
-目前只添加了查询转账订单接口`queryTransferOrder`的方法
+目前只添加了:
+查询转账订单接口`queryTransferOrder`的方法
+根据输入参数生成签名和签名字符串 `createAliPaySign` 的方法
 
 ## 安装
 
@@ -370,6 +372,36 @@ return service.queryTransferOrder(data).then(result=>{
 
 ---
 
+
+### 生成签名`createAliPaySign`
+
+[使用文档](https://docs.open.alipay.com/218/105327/)
+
+```javascript
+const data={
+      "apiname":"com.alipay.account.auth",
+      "method":"alipay.open.auth.sdk.code.get",
+      "app_id":"2016080100137766",
+      "app_name":"mc",
+      "biz_type":"openservice",
+      "pid":"2088711543147294",
+      "product_id":"APP_FAST_LOGIN",
+      "scope":"kuaijie",
+      "target_id":Date.now()+"",
+      "auth_type":"AUTHACCOUNT",
+      "sign_type":"RSA2"
+    };
+
+return service.createAliPaySign(data).then(result=>{
+   console.log("sign ==>",result["sign"]);
+   console.log("signStr ==>",result["signStr"]);
+})
+
+```
+
+
+---
+
 ## 功能列表
 
 - [x] 创建订单
@@ -385,6 +417,7 @@ return service.queryTransferOrder(data).then(result=>{
 - [x] 账单下载地址查询
 - [x] 单笔转账到支付宝账户
 - [x] 查询转账订单接口
+- [x] 生成签名
 
 ---
 

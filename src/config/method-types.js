@@ -13,6 +13,7 @@ export const FUND_TRANS_TOACCOUNT_TRANSFER = 'alipay.fund.trans.toaccount.transf
 export const FUND_TRANS_ORDER_QUERY = 'alipay.fund.trans.order.query'
 export const VERIFY_PAYMENT = 'verify.payment.status' //self define
 export const NOTIFY_RESPONSE = 'notify.response' //self define
+export const GET_USER_INFO_SHARE='alipay.user.info.share'
 
 export const METHOD_TYPES = {
   QUERY_ORDER,
@@ -28,6 +29,7 @@ export const METHOD_TYPES = {
   BILL_DOWNLOAD_QUERY,
   FUND_TRANS_TOACCOUNT_TRANSFER,
   FUND_TRANS_ORDER_QUERY,
+  GET_USER_INFO_SHARE,
   VERIFY_PAYMENT,
   NOTIFY_RESPONSE
 }

@@ -107,23 +107,35 @@ describe('ALIPAY unit test', function () {
   //   });
   // })
 
-  it('should allow createAliPaySign ',()=>{
+  // it('should allow createAliPaySign ',()=>{
+  //   const data={
+  //     "apiname":"com.alipay.account.auth",
+  //     "method":"alipay.open.auth.sdk.code.get",
+  //     "app_id":"2016080100137766",
+  //     "app_name":"mc",
+  //     "biz_type":"openservice",
+  //     "pid":"2088711543147294",
+  //     "product_id":"APP_FAST_LOGIN",
+  //     "scope":"kuaijie",
+  //     "target_id":Date.now()+"",
+  //     "auth_type":"AUTHACCOUNT",
+  //     "sign_type":"RSA2"
+  //   };
+  //   return service.createAliPaySign(data).then(result => {
+  //     console.log("sign ==>",result["sign"]);
+  //     console.log("signStr ==>",result["signStr"]);
+  //   })
+  // })
+
+  it("should allow getUserInfoShare ",()=>{
     const data={
-      "apiname":"com.alipay.account.auth",
-      "method":"alipay.open.auth.sdk.code.get",
-      "app_id":"2016080100137766",
-      "app_name":"mc",
-      "biz_type":"openservice",
-      "pid":"2088711543147294",
-      "product_id":"APP_FAST_LOGIN",
-      "scope":"kuaijie",
-      "target_id":Date.now()+"",
-      "auth_type":"AUTHACCOUNT",
-      "sign_type":"RSA2"
+      "auth_token":"sdfdfd"
     };
-    return service.createAliPaySign(data).then(result => {
-      console.log("sign ==>",result["sign"]);
-      console.log("signStr ==>",result["signStr"]);
+    return service.getUserInfoShare(data).then(result=>{
+      assert(result["code"]==-1);
+      assert(result.message == 'error', result.message);
+      assert(result.data.code === '20001');
+      assert(result.data.sub_msg === '无效的访问令牌');
     })
   })
 })

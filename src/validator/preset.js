@@ -13,6 +13,7 @@ import TradePrecreate from './module/trade_precreate'
 import TradeRefundQuery from './module/trade_refund_query'
 import BillDownloadQuery from './module/bill_download_query'
 import ToaccountTransfer from './module/toaccount_transfer'
+import GetUserInfoShare from './module/get_user_info_share'
 import QueryTransOrder from './module/query_trans_order'
 
 const Basic = {
@@ -81,5 +82,6 @@ export default {
   TradeRefundQuery,
   BillDownloadQuery,
   ToaccountTransfer,
-  QueryTransOrder
+  QueryTransOrder,
+  GetUserInfoShare,
 }

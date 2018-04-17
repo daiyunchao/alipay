@@ -25,8 +25,12 @@
 # 特别说明
 > 该库是来自 https://github.com/Luncher/alipay 的库,但由于想在该库中添加一些功能,提交的PR未合并,于是就自己fork了原作者的库,并且做出了一些修改
 目前只添加了:
+
 查询转账订单接口`queryTransferOrder`的方法
+
 根据输入参数生成签名和签名字符串 `createAliPaySign` 的方法
+
+支付宝会员授权信息查询接口 `getUserInfoShare`的方法
 
 ## 安装
 
@@ -399,6 +403,23 @@ return service.createAliPaySign(data).then(result=>{
 
 ```
 
+---
+
+
+### 支付宝会员授权信息查询接口`getUserInfoShare`
+
+[使用文档](https://docs.open.alipay.com/api_2/alipay.user.info.share)
+
+```javascript
+
+return service.getUserInfoShare(data).then(result=>{
+      assert(result["code"]==-1);
+      assert(result.message == 'error', result.message);
+      assert(result.data.code === '20001');
+      assert(result.data.sub_msg === '无效的访问令牌');
+})
+
+```
 
 ---
 
@@ -418,6 +439,7 @@ return service.createAliPaySign(data).then(result=>{
 - [x] 单笔转账到支付宝账户
 - [x] 查询转账订单接口
 - [x] 生成签名
+- [x] 支付宝会员授权信息查询接口
 
 ---
 

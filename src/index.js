@@ -3,7 +3,7 @@ import Promise from 'bluebird'
 import config from './config'
 import * as utils from './utils'
 import Validator from './validator'
-import {RESPONSE_MESSAGE, METHOD_TYPES} from './config'
+import { RESPONSE_MESSAGE, METHOD_TYPES } from './config'
 
 const isTest = process.env.NODE_ENV === 'test'
 const GETWAY = isTest ? config.ALIPAY_DEV_GETWAY : config.ALIPAY_GETWAY
@@ -38,7 +38,7 @@ export default class Alipay {
   }
 
   validateBasicParams(method, basicParams) {
-    const params = Object.assign({}, this.options, basicParams, {method})
+    const params = Object.assign({}, this.options, basicParams, { method })
     return Validator.validateBasicParams(params)
   }
 
@@ -52,7 +52,7 @@ export default class Alipay {
       this.validateAPIParams(method, publicParams)
     ])
       .then(result => {
-        return Object.assign({}, result[0], {biz_content: JSON.stringify(result[1])})
+        return Object.assign({}, result[0], { biz_content: JSON.stringify(result[1]) })
       })
       .then(params => {
         params.sign = utils.makeSign(this.privKey, params)
@@ -109,10 +109,10 @@ export default class Alipay {
           return this.makeResponse(params.result)
         } else {
           const code = isProcessing() ? '1' : '-1'
-          return {code, message: RESPONSE_MESSAGE[code]}
+          return { code, message: RESPONSE_MESSAGE[code] }
         }
       })
-      .catch(err => ({code: '-1', message: err.message, data: {}}))
+      .catch(err => ({ code: '-1', message: err.message, data: {} }))
   }
 
   makeNotifyResponse(params) {
@@ -121,14 +121,14 @@ export default class Alipay {
         return this.validateAPIParams(METHOD_TYPES.NOTIFY_RESPONSE, params)
       })
       .then(() => {
-        const resp = {sign: params.sign, 'async_notify_response': params, sign_type: params.sign_type}
+        const resp = { sign: params.sign, 'async_notify_response': params, sign_type: params.sign_type }
         return utils.verifySign(this.publicKey, resp, ['sign', 'sign_type'], params)
       })
       .then(valid => {
         const code = valid ? '0' : '-2'
-        return {code, message: RESPONSE_MESSAGE[code], data: params}
+        return { code, message: RESPONSE_MESSAGE[code], data: params }
       })
-      .catch(err => ({code: '-1', message: err.message, data: {}}))
+      .catch(err => ({ code: '-1', message: err.message, data: {} }))
   }
 
   createWebOrderURL(publicParams, basicParams = {}) {
@@ -166,9 +166,9 @@ export default class Alipay {
       })
       .then(data => {
         data = data + '&sign=' + encodeURIComponent(sign)
-        return {code: 0, message: RESPONSE_MESSAGE[0], data}
+        return { code: 0, message: RESPONSE_MESSAGE[0], data }
       })
-      .catch(err => ({code: '-1', message: err.message, data: {}}))
+      .catch(err => ({ code: '-1', message: err.message, data: {} }))
   }
 
   createWebOrder(publicParams, basicParams = {}) {
@@ -186,9 +186,9 @@ export default class Alipay {
       })
       .then(data => {
         data = data + '&sign=' + encodeURIComponent(sign)
-        return {code: 0, message: RESPONSE_MESSAGE[0], data}
+        return { code: 0, message: RESPONSE_MESSAGE[0], data }
       })
-      .catch(err => ({code: '-1', message: err.message, data: {}}))
+      .catch(err => ({ code: '-1', message: err.message, data: {} }))
   }
 
   //Compat
@@ -211,9 +211,9 @@ export default class Alipay {
       })
       .then(data => {
         data = data + '&sign=' + encodeURIComponent(sign)
-        return {code: 0, message: RESPONSE_MESSAGE[0], data}
+        return { code: 0, message: RESPONSE_MESSAGE[0], data }
       })
-      .catch(err => ({code: '-1', message: err.message, data: {}}))
+      .catch(err => ({ code: '-1', message: err.message, data: {} }))
   }
 
   queryOrder(publicParams, basicParams = {}) {
@@ -227,7 +227,7 @@ export default class Alipay {
             return this.makeRequest(params)
           })
       })
-      .catch(err => ({code: '-1', message: err.message, data: {}}))
+      .catch(err => ({ code: '-1', message: err.message, data: {} }))
   }
 
   cancelOrder(publicParams, basicParams = {}) {
@@ -332,16 +332,26 @@ export default class Alipay {
       })
   }
 
-  createAliPaySign(params){
+  getUserInfoShare(publicParams, basicParams = {}) {
     return Promise.resolve()
-    .then(()=>{
-      let signStr=utils.makeSignStr(params);
-      let sign= utils.makeSign(this.privKey,params);
-      signStr=signStr+"&sign="+sign;
-      return {
-        "sign":sign,
-        "signStr":signStr
-      }
-    })
+      .then(() => {
+        return this.validateParams(METHOD_TYPES.GET_USER_INFO_SHARE, publicParams, basicParams)
+          .then(params => {
+            return this.makeRequest(params)
+          })
+      })
+  }
+
+  createAliPaySign(params) {
+    return Promise.resolve()
+      .then(() => {
+        let signStr = utils.makeSignStr(params);
+        let sign = utils.makeSign(this.privKey, params);
+        signStr = signStr + "&sign=" + sign;
+        return {
+          "sign": sign,
+          "signStr": signStr
+        }
+      })
   }
 }

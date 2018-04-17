@@ -175,6 +175,10 @@ export function validateAPIParams(method, params) {
       instance = new Validator(Preset.QueryTransOrder, params)
       break
     }
+    case METHOD_TYPES.GET_USER_INFO_SHARE: {
+      instance = new Validator(Preset.GetUserInfoShare, params)
+      break
+    }
     default: {
       throw new Error(`Parser Unknow method type:${method}`)
     }

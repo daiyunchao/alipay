@@ -15,6 +15,7 @@ export default {
     'alipay.trade.app.pay': '生成创建订单所需参数',
     'alipay.fund.trans.toaccount.transfer': '单笔转账到支付宝账户接口',
     'alipay.fund.trans.order.query': '查询转账订单接口',
+    'alipay.user.info.share':'支付宝会员授权信息查询接口',
     'async.notify': '异步通知' // 自定义
   },
   ALIPAY_GETWAY_MESSAGE: {

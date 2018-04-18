@@ -127,26 +127,26 @@ describe('ALIPAY unit test', function () {
   //   })
   // })
 
-  it("should allow getUserInfoShare ",()=>{
-    const data={
-       "auth_token":"sdfdfd"
-    };
-    return service.getUserInfoShare({},data).then(result=>{
-      assert(result["code"]==-1);
-      assert(result.message == 'error', result.message);
-      assert(result.data.code === '20001');
-      assert(result.data.sub_msg === '无效的访问令牌');
-    })
-  })
+  // it("should allow getUserInfoShare ",()=>{
+  //   const data={
+  //      "auth_token":"sdfdfd"
+  //   };
+  //   return service.getUserInfoShare({},data).then(result=>{
+  //     assert(result["code"]==-1);
+  //     assert(result.message == 'error', result.message);
+  //     assert(result.data.code === '20001');
+  //     assert(result.data.sub_msg === '无效的访问令牌');
+  //   })
+  // })
 
 
   it("should allow getSystemOAuthToken ", () => {
     const data = {
       "grant_type": "authorization_code",
-      "code": "4b203fe6c11548bcabd8da5bb087a83b"
+      "code": "be724515676a461f92472b5056a1VA79"
     };
     return service.getSystemOAuthToken({},data).then(result => {
-      // console.log("result ==>",result);
+       console.log("result ==>",result);
        assert(result["code"] == -1);
        assert(result.message == 'error', result.message);
       

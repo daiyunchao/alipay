@@ -62,7 +62,11 @@ export default class Alipay {
   }
 
   makeResponse(response) {
-    console.log("makeResponse response==>", response);
+    if (response && response["alipay_system_oauth_token_response"] && response["alipay_system_oauth_token_response"]["access_token"]) {
+      //如果是该值返回的数据,是无公共响应参数的则无法判断是否正确
+      response["alipay_system_oauth_token_response"]["code"] = "10000";
+    }
+    
     const isSucceed = response => {
       return ['10000'].indexOf(response.code) !== -1
     }

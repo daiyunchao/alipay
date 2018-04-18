@@ -179,6 +179,10 @@ export function validateAPIParams(method, params) {
       instance = new Validator(Preset.GetUserInfoShare, params)
       break
     }
+    case METHOD_TYPES.GET_SYSTEM_OAUTH_TOKEN: {
+      instance = new Validator(Preset.GetSystemOAuthToken, params)
+      break
+    }
     default: {
       throw new Error(`Parser Unknow method type:${method}`)
     }

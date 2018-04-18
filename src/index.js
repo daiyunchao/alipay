@@ -52,6 +52,7 @@ export default class Alipay {
       this.validateAPIParams(method, publicParams)
     ])
       .then(result => {
+        // console.log("result 0==>", result);
         return Object.assign({}, result[0], { biz_content: JSON.stringify(result[1]) })
       })
       .then(params => {
@@ -61,6 +62,7 @@ export default class Alipay {
   }
 
   makeResponse(response) {
+    console.log("makeResponse response==>", response);
     const isSucceed = response => {
       return ['10000'].indexOf(response.code) !== -1
     }
@@ -68,8 +70,12 @@ export default class Alipay {
       return ['40006'].indexOf(response.code) !== -1
     }
     const result = {}
-    const respType = utils.responseType(response)
-    const respData = response[respType]
+    let respType = utils.responseType(response)
+    let respData = response[respType]
+    if (!respData) {
+      respType = "error_response";
+      respData = response[respType]
+    }
     if (isSucceed(respData)) {
       result.code = '0'
     } else if (isPermissionDenied(respData)) {
@@ -77,7 +83,7 @@ export default class Alipay {
     } else {
       result.code = '-1'
     }
-    result.data = response[respType]
+    result.data = respData;
     result.message = RESPONSE_MESSAGE[result.code]
 
     return result
@@ -85,12 +91,14 @@ export default class Alipay {
 
   makeRequest(params, options = {}) {
     const httpclient = urllib.create()
+    console.log("makeRequest params==>", params);
     return httpclient.request(GETWAY, Object.assign({}, {
       data: params,
       dataType: 'json',
       dataAsQueryString: true
     }, options))
       .then(resp => {
+        console.log("makeRequest resp==>", resp.data);
         return this.makeResponse(resp.data)
       })
   }
@@ -336,6 +344,17 @@ export default class Alipay {
     return Promise.resolve()
       .then(() => {
         return this.validateParams(METHOD_TYPES.GET_USER_INFO_SHARE, publicParams, basicParams)
+          .then(params => {
+            return this.makeRequest(params)
+          })
+      })
+  }
+
+
+  getSystemOAuthToken(publicParams, basicParams = {}) {
+    return Promise.resolve()
+      .then(() => {
+        return this.validateParams(METHOD_TYPES.GET_SYSTEM_OAUTH_TOKEN, publicParams, basicParams)
           .then(params => {
             return this.makeRequest(params)
           })

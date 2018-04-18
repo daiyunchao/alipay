@@ -14,7 +14,7 @@ export const FUND_TRANS_ORDER_QUERY = 'alipay.fund.trans.order.query'
 export const VERIFY_PAYMENT = 'verify.payment.status' //self define
 export const NOTIFY_RESPONSE = 'notify.response' //self define
 export const GET_USER_INFO_SHARE='alipay.user.info.share'
-
+export const GET_SYSTEM_OAUTH_TOKEN='alipay.system.oauth.token'
 export const METHOD_TYPES = {
   QUERY_ORDER,
   CREATE_APP_ORDER,
@@ -30,6 +30,7 @@ export const METHOD_TYPES = {
   FUND_TRANS_TOACCOUNT_TRANSFER,
   FUND_TRANS_ORDER_QUERY,
   GET_USER_INFO_SHARE,
+  GET_SYSTEM_OAUTH_TOKEN,
   VERIFY_PAYMENT,
-  NOTIFY_RESPONSE
+  NOTIFY_RESPONSE,
 }

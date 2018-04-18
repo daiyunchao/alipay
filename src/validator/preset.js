@@ -15,7 +15,7 @@ import BillDownloadQuery from './module/bill_download_query'
 import ToaccountTransfer from './module/toaccount_transfer'
 import GetUserInfoShare from './module/get_user_info_share'
 import QueryTransOrder from './module/query_trans_order'
-
+import GetSystemOAuthToken from './module/get_system_oauth_token'
 const Basic = {
   app_id: {
     type: 'string',
@@ -63,11 +63,32 @@ const Basic = {
   notify_url: {
     type: 'string',
     maxLength: 256
+  },
+  grant_type: {
+    type: 'string',
+    maxLength: 256
+  },
+  code: {
+    type: 'string',
+    maxLength: 256
+  },
+  refresh_token: {
+    type: 'string',
+    maxLength: 256
+  },
+  auth_token: {
+    type: 'string',
+    maxLength: 256
+  },
+  app_auth_token: {
+    type: 'string',
+    maxLength: 256
   }
+
 }
 
 export default {
-  Basic,  
+  Basic,
   Notify,
   VerifyPayment,
   CreateAppOrder,
@@ -84,4 +105,5 @@ export default {
   ToaccountTransfer,
   QueryTransOrder,
   GetUserInfoShare,
+  GetSystemOAuthToken
 }

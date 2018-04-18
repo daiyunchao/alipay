@@ -32,6 +32,8 @@
 
 支付宝会员授权信息查询接口 `getUserInfoShare`的方法
 
+换取授权访问令牌 `getSystemOAuthToken`的方法
+
 ## 安装
 
 ``` javascript
@@ -415,11 +417,34 @@ return service.createAliPaySign(data).then(result=>{
 let data={
   "auth_token":"sdfdfd"
 };
-return service.getUserInfoShare(data).then(result=>{
+return service.getUserInfoShare({},data).then(result=>{
       assert(result["code"]==-1);
       assert(result.message == 'error', result.message);
       assert(result.data.code === '20001');
       assert(result.data.sub_msg === '无效的访问令牌');
+})
+
+```
+
+
+---
+
+
+### 换取授权访问令牌`getSystemOAuthToken`
+
+[使用文档](https://docs.open.alipay.com/api_9/alipay.system.oauth.token)
+
+```javascript
+
+ const data = {
+      "grant_type": "authorization_code",
+      "code": "4b203fe6c11548bcabd8da5bb087a83b"
+    };
+return service.getSystemOAuthToken({},data).then(result=>{
+      assert(result["code"]==-1);
+      assert(result.message == 'error', result.message);
+      assert(result.data.code === '40002');
+      assert(result.data.sub_msg === '授权码code无效');
 })
 
 ```
@@ -443,6 +468,7 @@ return service.getUserInfoShare(data).then(result=>{
 - [x] 查询转账订单接口
 - [x] 生成签名
 - [x] 支付宝会员授权信息查询接口
+- [x] 换取授权访问令牌
 
 ---
 

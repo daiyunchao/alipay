@@ -91,14 +91,14 @@ export default class Alipay {
 
   makeRequest(params, options = {}) {
     const httpclient = urllib.create()
-    console.log("makeRequest params==>", params);
+    // console.log("makeRequest params==>", params);
     return httpclient.request(GETWAY, Object.assign({}, {
       data: params,
       dataType: 'json',
       dataAsQueryString: true
     }, options))
       .then(resp => {
-        console.log("makeRequest resp==>", resp.data);
+        // console.log("makeRequest resp==>", resp.data);
         return this.makeResponse(resp.data)
       })
   }
